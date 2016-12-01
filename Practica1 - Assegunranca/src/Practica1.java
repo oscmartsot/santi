@@ -34,12 +34,16 @@ public class Practica1 {
 		Client client3 = new Client("Martina Herranz", 3003, "adreca", 9303003, "Sant Pol de mar", "ES10293123901829038");
 		Client client4 = new Client("Mar Mir", 3004, "adreca", 9303004, "Arenys de munt", "ES00231029301923091");
 
-		
+
+
 
 		AssegurancaVehicle a1 = new AssegurancaVehicle(new Date("10/2/2015"), client1, 600, agent1, "B00000", 40, 0.3f);
 		companyia.addAsseguranca(a1);
 
-	
+		companyia.remAsseguranca(a1);
+
+		a1 = new AssegurancaVehicle(new Date("10/2/2015"), client1, 600, agent1, "B00000", 40, 0.3f);
+
 		//Assegurances de Vida
 		AssegurancaVida a2 = new AssegurancaVida(new Date("10/14/2015"), client2, 2200, agent1, 40, "Informatic", 150000);
 		// Cas d'us: afegir un beneficiari

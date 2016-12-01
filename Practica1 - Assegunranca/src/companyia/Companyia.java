@@ -231,21 +231,13 @@ public class Companyia {
 		public boolean existsClient(Client client){
 
 			Node item = this.clients;
-
-			// Hi han clients?
-			if( item == null) return false;
-			
-			// es el primer?
-			if(item.getClient().equals(client)) return true;
-			
-			// Mctode de cerca a seqccncia enllacada
+			if( item == null) return false; // Si no hi han clients tornem fals
+			// Mctode de cerca a sequencia enllacada
 			boolean trobat = false;
-			while(item != null){
-				if(item.getClient().equals(client)) {
+			while(item != null && trobat != true){
+				if(item.client.equals(client))
 					trobat = true;
-					break;
-				}
-				item = item.getSeguent();
+				item = item.seguent;
 			}
 			return trobat;
 		}
@@ -263,35 +255,22 @@ public class Companyia {
 		}
 		
 		private void remClient(Client client){
-
-			Node item = this.clients;
-			while(item!= null){
-				if(item.client.equals(client)) {
-					// Eliminar client i Node
-					// Si es el node cap, apuntar al seguent
-					if(item.equals(this.clients)) {
-
-						this.clients = item.getSeguent();
-						item = null;
-						
-						return;
-					} 
-					// Si no es el node cap, trobar anterior i apuntar al seguent
-					else {
-						Node anterior = this.clients;
-						while(anterior.getSeguent()!= null){
-							if(anterior.getSeguent().client.equals(client)) {
-								
-								anterior.setSeguent(item.getSeguent());
-								item = null;
-								
-								return;
-							} 
-						}
-					}
+			// cas 1. no hi es
+			if (this.clients == null) return;
+			// cas 2. es el primer
+			if(this.clients.client.equals(client)) {
+				this.clients = this.clients.seguent;
+				return;
+			}
+			// cas 3. es un altre
+			Node anterior = this.clients;
+			while(anterior.seguent != null){
+				if(anterior.seguent.client.equals(client)) {
+					anterior.seguent = anterior.seguent.seguent;
+					return;
 				}
-				item = item.getSeguent();
-			}		
+				anterior = anterior.seguent;
+			}
 		}
 		
 		private Node getLastNode(){
